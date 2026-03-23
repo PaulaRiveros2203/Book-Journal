@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Journal — Diagrama ERD</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f1117;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-top: 10px;
+    }
+
+    .erd-container {
+      width: 100%;
+      max-width: 1100px;
+      background: #141820;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .entities {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .entity {
+      background: #1a2035;
+      border-radius: 12px;
+      overflow: hidden;
+      width: 280px;
+      border: 1px solid #2d3748;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .entity-header {
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .entity-header .icon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .entity.usuario .entity-header { background: #1e3a5f; color: #60a5fa; border-bottom: 1px solid #2d4a6e; }
+    .entity.usuario .entity-header .icon { background: #60a5fa; }
+    .entity.libro .entity-header { background: #1a3a2e; color: #34d399; border-bottom: 1px solid #2d4a3e; }
+    .entity.libro .entity-header .icon { background: #34d399; }
+    .entity.deseo .entity-header { background: #3a1a3a; color: #c084fc; border-bottom: 1px solid #4a2d5a; }
+    .entity.deseo .entity-header .icon { background: #c084fc; }
+
+    .entity-fields { padding: 8px 0; }
+
+    .field {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 18px;
+      font-size: 13px;
+      border-bottom: 1px solid #1e293b;
+      transition: background 0.15s;
+    }
+
+    .field:last-child { border-bottom: none; }
+    .field:hover { background: #1e2a40; }
+
+    .field-name {
+      color: #cbd5e1;
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+    }
+
+    .field-name.pk { color: #fbbf24; font-weight: 600; }
+    .field-name.fk { color: #f87171; }
+
+    .field-type {
+      color: #475569;
+      font-size: 11px;
+      font-family: 'Courier New', monospace;
+      background: #0f172a;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #1e293b;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+    .tag.pk { background: #78350f; color: #fcd34d; }
+    .tag.fk { background: #450a0a; color: #fca5a5; }
+
+    /* Relaciones */
+    .relations {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .relation-title {
+      font-size: 13px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .relation {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #1a2035;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 12px 24px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .rel-entity {
+      font-size: 13px;
+      font-weight: 600;
+      font-family: 'Courier New', monospace;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .rel-entity.usuario { background: #1e3a5f; color: #60a5fa; }
+    .rel-entity.libro { background: #1a3a2e; color: #34d399; }
+    .rel-entity.deseo { background: #3a1a3a; color: #c084fc; }
+
+    .rel-arrow {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 12px;
+    }
+
+    .rel-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, #334155, #475569, #334155);
+    }
+
+    .rel-label {
+      font-size: 11px;
+      color: #94a3b8;
+      background: #0f172a;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid #334155;
+      white-space: nowrap;
+    }
+
+    .cardinality {
+      font-size: 11px;
+      color: #64748b;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Leyenda */
+    .legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #1e293b;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 2px;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #334155;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>📚 Book Journal</h1>
+    <p>Diagrama Entidad-Relación — Base de datos PostgreSQL</p>
+    <span class="badge">PostgreSQL 18 · Puerto 5433 · libreria_online</span>
+  </div>
+
+  <div class="erd-container">
+
+    <!-- Entidades -->
+    <div class="entities">
+
+      <!-- Usuario -->
+      <div class="entity usuario">
+        <div class="entity-header">
+          <span class="icon"></span> usuarios
+        </div>
+        <div class="entity-fields">
+          <div class="field">
+            <span class="field-name pk">id <span class="tag pk">PK</span></span>
+            <span class="field-type">SERIAL</span>
+          </div>
+          <div class="field">
+            <span class="field-name">nombre</span>
+            <span class="field-type">VARCHAR(100)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">apellido</span>
+            <span class="field-type">VARCHAR(100)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">correo</span>
+            <span class="field-type">VARCHAR(150)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">password</span>
+            <span class="field-type">VARCHAR(255)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">fecha_nacimiento</span>
+            <span class="field-type">VARCHAR(50)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">genero_favorito</span>
+            <span class="field-type">VARCHAR(100)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">promedio_lectura</span>
+            <span class="field-type">VARCHAR(50)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">fecha_registro</span>
+            <span class="field-type">TIMESTAMP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Libros leídos -->
+      <div class="entity libro">
+        <div class="entity-header">
+          <span class="icon"></span> libros_leidos
+        </div>
+        <div class="entity-fields">
+          <div class="field">
+            <span class="field-name pk">id <span class="tag pk">PK</span></span>
+            <span class="field-type">SERIAL</span>
+          </div>
+          <div class="field">
+            <span class="field-name fk">usuario_id <span class="tag fk">FK</span></span>
+            <span class="field-type">INT</span>
+          </div>
+          <div class="field">
+            <span class="field-name">titulo</span>
+            <span class="field-type">VARCHAR(200)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">autor</span>
+            <span class="field-type">VARCHAR(150)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">genero</span>
+            <span class="field-type">VARCHAR(100)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">resena</span>
+            <span class="field-type">TEXT</span>
+          </div>
+          <div class="field">
+            <span class="field-name">inicio</span>
+            <span class="field-type">DATE</span>
+          </div>
+          <div class="field">
+            <span class="field-name">fin</span>
+            <span class="field-type">DATE</span>
+          </div>
+          <div class="field">
+            <span class="field-name">calificacion</span>
+            <span class="field-type">INT (1–5)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">fecha_agregado</span>
+            <span class="field-type">TIMESTAMP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Libros deseados -->
+      <div class="entity deseo">
+        <div class="entity-header">
+          <span class="icon"></span> libros_deseados
+        </div>
+        <div class="entity-fields">
+          <div class="field">
+            <span class="field-name pk">id <span class="tag pk">PK</span></span>
+            <span class="field-type">SERIAL</span>
+          </div>
+          <div class="field">
+            <span class="field-name fk">usuario_id <span class="tag fk">FK</span></span>
+            <span class="field-type">INT</span>
+          </div>
+          <div class="field">
+            <span class="field-name">titulo</span>
+            <span class="field-type">VARCHAR(200)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">autor</span>
+            <span class="field-type">VARCHAR(150)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">genero</span>
+            <span class="field-type">VARCHAR(100)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">prioridad</span>
+            <span class="field-type">INT (1–3)</span>
+          </div>
+          <div class="field">
+            <span class="field-name">notas</span>
+            <span class="field-type">TEXT</span>
+          </div>
+          <div class="field">
+            <span class="field-name">fecha_agregado</span>
+            <span class="field-type">TIMESTAMP</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Relaciones -->
+    <p class="relation-title">Relaciones</p>
+    <div class="relations">
+
+      <div class="relation">
+        <span class="rel-entity usuario">usuarios</span>
+        <div class="rel-arrow">
+          <span class="cardinality">1</span>
+          <div class="rel-line"></div>
+          <span class="rel-label">registra</span>
+          <div class="rel-line"></div>
+          <span class="cardinality">0..*</span>
+        </div>
+        <span class="rel-entity libro">libros_leidos</span>
+      </div>
+
+      <div class="relation">
+        <span class="rel-entity usuario">usuarios</span>
+        <div class="rel-arrow">
+          <span class="cardinality">1</span>
+          <div class="rel-line"></div>
+          <span class="rel-label">agrega</span>
+          <div class="rel-line"></div>
+          <span class="cardinality">0..*</span>
+        </div>
+        <span class="rel-entity deseo">libros_deseados</span>
+      </div>
+
+    </div>
+
+    <!-- Leyenda -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#fbbf24"></div>
+        PK — Clave primaria
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f87171"></div>
+        FK — Clave foránea
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#60a5fa"></div>
+        usuarios
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#34d399"></div>
+        libros_leidos
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#c084fc"></div>
+        libros_deseados
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Book Journal · Diagrama generado para entrega académica</div>
+
+</body>
+</html>
