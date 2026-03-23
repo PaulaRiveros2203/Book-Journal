@@ -63,4 +63,13 @@ function cerrarSesion() {
         localStorage.removeItem(STORAGE_KEY);
         irlogin();
     }
+
+    try {
+        const usuario = JSON.parse(datos);
+        renderizarPerfil(usuario);
+    } catch (error) {
+        console.error("Error al leer los datos de sesión:", error);
+        localStorage.removeItem(STORAGE_KEY);
+        window.location.href = "login.html";
+    }
 }

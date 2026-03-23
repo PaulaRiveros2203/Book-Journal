@@ -8,7 +8,7 @@ function irperfil() {
 
 // iniciar
 document.addEventListener('DOMContentLoaded', async () => {
-
+    
     const datos = localStorage.getItem(STORAGE_KEY);
 
     if (!datos) {
