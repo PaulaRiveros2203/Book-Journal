@@ -42,37 +42,37 @@ Book-Journal/
 *frontend Laura Lopez*
 Para realizar el frontend del BOOK JOURNAL se dividió la página web en 7 módulos diferentes: 
     •	Login.html: formulario para el ingreso a las pagina de Book Journal se solicita que se ingrese el correo o usuario y la contraseña además de dos botones el que da inicio de sesión y otro que dirige a la página de registro. Además, tiene una imagen de unos libros.
-    ![captura de pantalla login](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Login)
+    ![captura de pantalla login](Imagenes-README/Login)
     •	Registro.html: formulario diseñado para capturar los datos de un nuevo usuario (nombre completo, correo electrónico, crear una contraseña, fecha de nacimiento, promedio de lectura diaria y genero favorito), tiene dos botones Finalizar registro para que se guarden los datos del formulario en la base de datos y volver para regresar a login.
-    ![captura de pantalla registo](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Registro)
+    ![captura de pantalla registo](Imagenes-README/Registro)
 una vez dentro de la página de Book Journal hay partes que se comparten en todos los módulos. En la parte superior se encuentra una barra, en la parte izquierda se encuentra un menú desplegable en el cual se puede navegar en toda la página (lectura actual, libros leídos, libros deseados y cerrar sesión) en la mitad se encuentra el nombre de la página BOOK JOURNAL y en la parte derecha esta una imagen que funciona como un botón el cual llevara al módulo de perfil.
     •	Perfil.html: permite al usuario ver los datos que se ingresaron en el momento de registrase (nombre completo, correo electrónico, crear una contraseña, fecha de nacimiento, promedio de lectura diaria y genero favorito).
-    ![Captura de pantalla perfil](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Perfil)
+    ![Captura de pantalla perfil](Imagenes-README/Perfil)
     •	edit_perfil.html: En este módulo el usuario podrá editar y cambiar los datos que ingreso en un principio al crear la cuenta, debe volver a llenar todos los datos desde cero.
-    ![Captura de pantalla editar el perfil](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Edit_perfil)
+    ![Captura de pantalla editar el perfil](Imagenes-README/Edit_perfil)
     •	Lista_deseos.html: Formulario sencillo para el ingreso de nuevos libros a la lista de deseos, una vez ingresados los libros que se desea ver en el futuro cada libro aparecerá en una tarjeta y se permite seleccionar cuando ya se hallando leído.
-    ![Captura de pantalla lista libros deseados](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Lista_deseos)
+    ![Captura de pantalla lista libros deseados](Imagenes-README/Lista_deseos)
     •	Lectura_actual.html: formulario donde se ingresa los datos sobre un libro que se está leyendo en el momento (Nombre del libro, autor, genero, reseña, fecha inicio y fecha final, calificación mediante 5 estrellas interactivas). al final del formulario tiene un botón el cual permite guardar los datos del formulario y se dirige al módulo de libros leídos.
-    ![Captura de pantalla lectura actual](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Lectura_actual)
+    ![Captura de pantalla lectura actual](Imagenes-README/Lectura_actual)
     •	Libros_leidos.html: en este módulo se pueden visualizar los libros que ya se han agregado desde el módulo lectura actual, cada libro aparece en una tarjeta diferente y se puede borrar en caso de que haya un error o solo se quiera borrar del registro, este módulo cuenta con una barra de búsqueda, en la cual se podrá buscar dentro de la base de datos.
-    ![Captura de pantalla lista de libros leidos](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Libros_leidos)
+    ![Captura de pantalla lista de libros leidos](Imagenes-README/Libros_leidos)
 Para cada uno de los módulos se creó un css personalizado a pesar de que muchas de las funciones son muy parecidas hay algunas funciones diferentes en cada módulo, a nivel general los css tiene dos fuentes (Patrick hand y dancing script), da tonalidades verdes y pone imágenes decorativas de hojas. en el caso de lectura actual y libros leídos también maneja las interacciones de colores de las estrellas, también permite visualizar mejor las fechas.
     •	Estilo general del cuerpo
     •	Navbar y Menú Desplegable
-    ![Captura de pantalla navbar](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Navbar)
-    ![Captura de menu desplegable ](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Menu_desplegable)
+    ![Captura de pantalla navbar](Imagenes-README/Navbar)
+    ![Captura de menu desplegable ](Imagenes-README/Menu_desplegable)
     •	Títulos y Tipografías
-    ![Captura de titulo y tipografia](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Titulos_tipografia)   
+    ![Captura de titulo y tipografia](Imagenes-README/Titulos_tipografia)   
     •	Inputs y Formularios
-    ![Captura de pantalla input en formularios](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Formularios)
+    ![Captura de pantalla input en formularios](Imagenes-README/Formularios)
     •	Botones
-    ![Captura de pantalla botones](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Botones)
+    ![Captura de pantalla botones](Imagenes-README/Botones)
     •	Cards de Libros e Historial
-    ![Captura de pantalla cards de los libros e historial](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Tarjetas_libros)
+    ![Captura de pantalla cards de los libros e historial](Imagenes-README/Tarjetas_libros)
     •	Sistema de Estrellas
-    ![Captura de pantalla sistema de estrellas calificacion](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Sistema_estrellas)
+    ![Captura de pantalla sistema de estrellas calificacion](Imagenes-README/Sistema_estrellas)
     •	Perfil e Imágenes Laterales
-    ![Captura de pantalla Perfil y hojas de corativas](https://github.com/PaulaRiveros2203/Book-Journal/blob/main/Imagenes-README/Perfil-hojasdecorativas)
+    ![Captura de pantalla Perfil y hojas de corativas](Imagenes-README/Perfil-hojasdecorativas)
 De la misma forma se creó un script para cada uno de nos módulos, los scripts están diseñados en lenguajes JavaScript y se realizó el manejo de estados de carga y errores, en cada uno de los módulos se diseñaron diferentes tipos de manejos de carga y errores:
     1.	Login.js: 
         •	Validación de condiciones necesarias: Se asegura que el usuario Introduzca los datos necesarios para iniciar sesión en caso de que el usuario no lo halla hecho creara una alerta. 
