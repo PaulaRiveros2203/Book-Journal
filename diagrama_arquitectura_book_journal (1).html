@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Journal — Diagrama de Arquitectura</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0f1117;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      color: #e2e8f0;
+    }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { font-size: 26px; font-weight: 600; color: #e2e8f0; margin-bottom: 6px; }
+    .header p { font-size: 14px; color: #64748b; }
+    .badge {
+      display: inline-block;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-top: 10px;
+    }
+    .diagram {
+      width: 100%;
+      max-width: 1000px;
+      background: #141820;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 40px 30px;
+    }
+    .layer {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .layer-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #475569;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .box {
+      border-radius: 10px;
+      padding: 14px 18px;
+      min-width: 140px;
+      text-align: center;
+    }
+    .box-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .box-sub {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+    .box.blue { background: #1e3a5f; border: 1px solid #2d4a6e; }
+    .box.blue .box-title { color: #60a5fa; }
+    .box.blue .box-sub { color: #93c5fd; }
+    .box.green { background: #1a3a2e; border: 1px solid #2d4a3e; }
+    .box.green .box-title { color: #34d399; }
+    .box.green .box-sub { color: #6ee7b7; }
+    .box.purple { background: #2d1b5e; border: 1px solid #3d2a7e; }
+    .box.purple .box-title { color: #a78bfa; }
+    .box.purple .box-sub { color: #c4b5fd; }
+    .box.amber { background: #3a2a10; border: 1px solid #5a3e18; }
+    .box.amber .box-title { color: #fbbf24; }
+    .box.amber .box-sub { color: #fcd34d; }
+    .box.teal { background: #0f3a3a; border: 1px solid #1a5050; }
+    .box.teal .box-title { color: #2dd4bf; }
+    .box.teal .box-sub { color: #5eead4; }
+    .box.gray { background: #1e2535; border: 1px solid #2d3748; }
+    .box.gray .box-title { color: #94a3b8; }
+    .box.gray .box-sub { color: #64748b; }
+    .cloud-container {
+      border: 1px dashed #334155;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 12px;
+    }
+    .cloud-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #334155;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .arrows {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 4px 0;
+      color: #334155;
+      font-size: 18px;
+    }
+    .arrow-label {
+      font-size: 10px;
+      color: #475569;
+      text-align: center;
+      margin: 2px 0 8px;
+      letter-spacing: 0.5px;
+    }
+    .divider {
+      border: none;
+      border-top: 1px dashed #1e293b;
+      margin: 20px 0;
+    }
+    .legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: #64748b;
+    }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 2px;
+    }
+    .footer {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #334155;
+      text-align: center;
+    }
+    .tech-stack {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .tech-pill {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1> Book Journal — Arquitectura del Sistema</h1>
+    <p>Diagrama de componentes y flujo de datos</p>
+    <span class="badge">HTML · JavaScript · Spring Boot · PostgreSQL · Google Cloud SQL</span>
+  </div>
+
+  <div class="diagram">
+
+    <!-- Capa 1: Cliente -->
+    <p class="layer-label">Capa de presentacion — Frontend (HTML + CSS + JavaScript)</p>
+    <div class="layer">
+      <div class="box blue">
+        <div class="box-title">login.html</div>
+        <div class="box-sub">Autenticacion</div>
+      </div>
+      <div class="box blue">
+        <div class="box-title">registro.html</div>
+        <div class="box-sub">Creacion de cuenta</div>
+      </div>
+      <div class="box blue">
+        <div class="box-title">home.html</div>
+        <div class="box-sub">Dashboard</div>
+      </div>
+      <div class="box blue">
+        <div class="box-title">libros_leidos.html</div>
+        <div class="box-sub">Historial + estrellas</div>
+      </div>
+      <div class="box blue">
+        <div class="box-title">lista_deseos.html</div>
+        <div class="box-sub">Libros pendientes</div>
+      </div>
+      <div class="box blue">
+        <div class="box-title">perfil.html</div>
+        <div class="box-sub">Datos del usuario</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="box gray">
+        <div class="box-title">api-config.js</div>
+        <div class="box-sub">Fetch + endpoints</div>
+      </div>
+      <div class="box gray">
+        <div class="box-title">login.js / registro.js</div>
+        <div class="box-sub">Logica de formularios</div>
+      </div>
+      <div class="box gray">
+        <div class="box-title">historial.js</div>
+        <div class="box-sub">Libros y estrellas</div>
+      </div>
+    </div>
+
+    <div class="arrows">↓ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ↓</div>
+    <p class="arrow-label">HTTP / REST API (JSON)</p>
+
+    <!-- Capa 2: Backend -->
+    <p class="layer-label">Capa de negocio — Backend (Spring Boot · Java)</p>
+    <div class="layer">
+      <div class="box green">
+        <div class="box-title">UsuarioController</div>
+        <div class="box-sub">/api/usuarios</div>
+      </div>
+      <div class="box green">
+        <div class="box-title">LibroController</div>
+        <div class="box-sub">/api/libros</div>
+      </div>
+      <div class="box green">
+        <div class="box-title">DeseoController</div>
+        <div class="box-sub">/api/deseos</div>
+      </div>
+      <div class="box purple">
+        <div class="box-title">SecurityConfig</div>
+        <div class="box-sub">JWT + CORS</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="box green">
+        <div class="box-title">UsuarioService</div>
+        <div class="box-sub">Logica de negocio</div>
+      </div>
+      <div class="box green">
+        <div class="box-title">LibroService</div>
+        <div class="box-sub">Logica de negocio</div>
+      </div>
+      <div class="box green">
+        <div class="box-title">DeseoService</div>
+        <div class="box-sub">Logica de negocio</div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="box teal">
+        <div class="box-title">UsuarioRepository</div>
+        <div class="box-sub">JPA · consultas SQL</div>
+      </div>
+      <div class="box teal">
+        <div class="box-title">LibroRepository</div>
+        <div class="box-sub">JPA · consultas SQL</div>
+      </div>
+      <div class="box teal">
+        <div class="box-title">DeseoRepository</div>
+        <div class="box-sub">JPA · consultas SQL</div>
+      </div>
+    </div>
+
+    <div class="arrows">↓</div>
+    <p class="arrow-label">JDBC · PostgreSQL Driver</p>
+
+    <!-- Capa 3: Nube -->
+    <div class="cloud-container">
+      <p class="cloud-label">Google Cloud</p>
+
+      <p class="layer-label">Base de datos — Cloud SQL (PostgreSQL 18)</p>
+      <div class="layer">
+        <div class="box amber">
+          <div class="box-title">usuarios</div>
+        </div>
+        <div class="box amber">
+          <div class="box-title">libros_leidos</div>
+        </div>
+        <div class="box amber">
+          <div class="box-title">libros_deseados</div>
+        </div>
+      </div>
+
+      <div class="layer" style="margin-top:8px">
+        <div class="box gray" style="min-width:200px">
+          <div class="box-title">IP: 34.66.88.86 · Puerto: 5432</div>
+          <div class="box-sub">DB: libreria_online · User: bookjournal</div>
+        </div>
+        <div class="box gray" style="min-width:200px">
+          <div class="box-title">Cloud Storage</div>
+          <div class="box-sub">bucket: book-journal-sql</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Leyenda -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#60a5fa"></div>
+        Frontend
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#34d399"></div>
+        Backend (Spring Boot)
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#a78bfa"></div>
+        Seguridad
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#2dd4bf"></div>
+        Repositorios JPA
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#fbbf24"></div>
+        Base de datos
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Book Journal · Diagrama de arquitectura · Entrega academica 2026</div>
+
+</body>
+</html>
