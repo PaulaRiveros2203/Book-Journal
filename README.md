@@ -1,5 +1,6 @@
 # Book-Journal
 *estructura del proyecto*
+```
 Book-Journal/
 ├── frontend/                   // Interfaz de usuario y lógica de cliente
 │   ├── html/                   // Vistas de la aplicación
@@ -39,6 +40,7 @@ Book-Journal/
 │   │   └── seed_data.sql       // Datos de prueba para el desarrollo
 │   └── diagramas/              // Modelo Entidad-Relación (MER)
 └── README.md                   // Documentación técnica completa del proyecto
+```
 *frontend Laura Lopez*
 Para realizar el frontend del BOOK JOURNAL se dividió la página web en 7 módulos diferentes: 
 
@@ -117,7 +119,7 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
     }
  ```
 
-    - Gestión de respuestas HTTP no exitosa: los datos pasan por la API al no coincidir con los datos que corresponden devuelve que los datos-credenciales ingresados no son correctos, por lo tanto, no fue posible iniciar sesión.
+   - Gestión de respuestas HTTP no exitosa: los datos pasan por la API al no coincidir con los datos que corresponden devuelve que los datos-credenciales ingresados no son correctos, por lo tanto, no fue posible iniciar sesión.
 ```javascript
     if (!respuesta.ok) {
     alert("Credenciales incorrectas");
@@ -179,7 +181,7 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
             }
 ```
    - Gestión de excepciones de infraestructura: este manejo de errores se realiza con try-catch, y se va a encargar de cualquier fallo que ocurra mediante la ejecución de las tareas asincrónicas que no se manejan con la lógica dentro del script. 
-   
+
 ```javascript
             try {
                 const respuesta = await fetch(`${API_URL}/registro`, {
