@@ -167,7 +167,7 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
             return;
                 }
 ```
-    - Validación coincidencia password y confirmación de password: valida que el password y la confirmación de password sean idénticas.   
+   - Validación coincidencia password y confirmación de password: valida que el password y la confirmación de password sean idénticas.   
 ```javascript
                 if (password !== confirmar) {
                     alert("Las contraseñas no coinciden");
