@@ -41,7 +41,8 @@ Book-Journal/
 │   └── diagramas/              // Modelo Entidad-Relación (MER)
 └── README.md                   // Documentación técnica completa del proyecto
 ```
-*frontend Laura Lopez*
+## Frontend Laura Lopez
+
 Para realizar el frontend del BOOK JOURNAL se dividió la página web en 7 módulos diferentes: 
 
 
