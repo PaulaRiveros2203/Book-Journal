@@ -125,7 +125,8 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
     }
 ```
 
-    - Captura de excepciones críticas y fallos de red: la función try-catch controla los errores inesperados que no están dentro de la lógica de l aplicación, como es el caso de la infraestructura o la conectividad. 
+   - Captura de excepciones críticas y fallos de red: la función try-catch controla los errores inesperados que no están dentro de la lógica de l aplicación, como es el caso de la infraestructura o la conectividad. 
+
  ```javascript
             try {
             const respuesta = await fetch(`${API_URL}/login`, {
@@ -156,6 +157,7 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
 ```
 2. regitro.js:
     - Validación de integridad: Es el primer control de errores dentro del registro ayuda a evitar registros incompletos,  se utiliza if (!nombre || !correo || !password || !confirmar) para poder verificar que los datos mas importantes como nombre, correo, password y la confirmación de password, en caso de que alguno falte va a enviar una alerta que indica que hay espacios vacíos.
+
 ```javascript
             if (!nombre || !correo || !password || !confirmar) {
             alert("Completa los campos obligatorios");
@@ -169,14 +171,15 @@ De la misma forma se creó un script para cada uno de nos módulos, los scripts 
                     return;
                 }
 ```
-    - Control de respuestas del lado del servidor: Una vez que ya se hallan enviado los datos para guardar en la base de datos, el script va a monitorear la respuesta de HTTP. En esta parte se va a validar que no hallan correos repetidos o fallos en la base de datos.
+   - Control de respuestas del lado del servidor: Una vez que ya se hallan enviado los datos para guardar en la base de datos, el script va a monitorear la respuesta de HTTP. En esta parte se va a validar que no hallan correos repetidos o fallos en la base de datos.
 ```javascript
             if (!respuesta.ok) {
                 alert("Error al registrar");
                 return;
             }
 ```
-    - Gestión de excepciones de infraestructura: este manejo de errores se realiza con try-catch, y se va a encargar de cualquier fallo que ocurra mediante la ejecución de las tareas asincrónicas que no se manejan con la lógica dentro del script. 
+   - Gestión de excepciones de infraestructura: este manejo de errores se realiza con try-catch, y se va a encargar de cualquier fallo que ocurra mediante la ejecución de las tareas asincrónicas que no se manejan con la lógica dentro del script. 
+   
 ```javascript
             try {
                 const respuesta = await fetch(`${API_URL}/registro`, {
