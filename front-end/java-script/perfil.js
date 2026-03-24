@@ -1,14 +1,12 @@
 const API_URL = 'http://localhost:8080/api/usuarios';
 const STORAGE_KEY = 'usuarioLogueado';
 
-// navegación
 function irlectura_actual() { window.location.href = "lectura_actual.html"; }
 function irlibros_leidos() { window.location.href = "libros_leidos.html"; }
 function irlista_deseos() { window.location.href = "lista_deseos.html"; }
 function irperfil() { window.location.href = "perfil.html"; }
 function irlogin() { window.location.href = "login.html"; }
 
-// cargar perfil
 document.addEventListener('DOMContentLoaded', async () => {
 
     const datosLocal = localStorage.getItem(STORAGE_KEY);
@@ -28,7 +26,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const usuario = await respuesta.json();
 
-        // actualizar localStorage
         localStorage.setItem(STORAGE_KEY, JSON.stringify(usuario));
 
         renderizarPerfil(usuario);
@@ -39,7 +36,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// mostrar datos
 function renderizarPerfil(usuario) {
     document.querySelector('.nombrecompleto').textContent =
         `Nombre completo: ${usuario.nombre}`;
@@ -57,7 +53,6 @@ function renderizarPerfil(usuario) {
         `<strong>Género favorito:</strong> ${usuario.generoFavorito}`;
 }
 
-// cerrar sesión
 function cerrarSesion() {
     if (confirm("¿Cerrar sesión?")) {
         localStorage.removeItem(STORAGE_KEY);

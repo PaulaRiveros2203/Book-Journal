@@ -1,19 +1,16 @@
-// URL correcta
 const API_URL = 'http://localhost:8080/api/deseos';
 
-// navegación
 function irlectura_actual() { window.location.href = "lectura_actual.html"; }
 function irlibros_leidos() { window.location.href = "libros_leidos.html"; }
 function irlista_deseos() { window.location.href = "lista_deseos.html"; }
 function irperfil() { window.location.href = "perfil.html"; }
 function irlogin() { window.location.href = "login.html"; }
 
-// iniciar
 document.addEventListener('DOMContentLoaded', () => {
     cargarDeseos();
 });
 
-// cargar deseos
+
 async function cargarDeseos() {
     const contenedor = document.getElementById('lista-deseos-container');
     contenedor.innerHTML = '';
@@ -41,7 +38,6 @@ async function cargarDeseos() {
     }
 }
 
-// renderizar tarjeta
 function renderizarTarjeta(libro) {
     const contenedor = document.getElementById('lista-deseos-container');
 
@@ -56,7 +52,6 @@ function renderizarTarjeta(libro) {
     contenedor.appendChild(tarjeta);
 }
 
-// agregar deseo
 async function addWish() {
     const input = document.getElementById('wish-input');
     const titulo = input.value.trim();
@@ -83,7 +78,6 @@ async function addWish() {
     }
 }
 
-// eliminar deseo
 async function eliminarDeseo(id) {
     if (!confirm("¿Eliminar este libro de tu lista?")) return;
 
