@@ -1,36 +1,137 @@
-# Book Journal — Base de Datos
+# 📖 Book Journal | Tu biblioteca digital personal
 
-## Descripción
-Base de datos PostgreSQL para la aplicación **Book Journal**, una librería online que permite a los usuarios registrarse, llevar un registro de libros leídos y gestionar su lista de libros deseados.
+
+## Descripción del Proyecto y Dominio Elegido
+**Book Journal** es una aplicación web que está enfocada en la gestión personal de lectura, favorece la organización, registro y seguimiento de los libros de los potentes usuarios de una forma prática e intuitiva.
+
+Esta plataforma permite hacer el registro de libros nuevos, visualización en biblioteca personalizada, marcación de libros leídos para tener un control en cueestiones de progreso, elimina registros según la necesidad del usuario.
+
+Este proyecto se enfocó en una arquitectura basada en servicios, apoyandonos del framework SpringBoot, con la ayuda de esta herramienta se evidencia una API REST robusta, escalable y fácil de integrar con el frontend.
+
+## 👩‍💻✨ Integrantes del Grupo y División de Responsabilidades
+
+| Integrante | Rol | Responsabilidades |
+|----------|------|------------------|
+| **Laura Lopez** | Frontend 🎨 | Desarrollo del frontend (HTML, CSS, JavaScript) |
+| **Juan Narvaez** | Backend ⚙️ | Desarrollo del backend con Spring Boot |
+| **Paula Riveros** | Database🗄️ | Diseño e implementación de la base de datos |
+| **Dayana Pulido** | Cloud ☁️ | Despliegue en Google Cloud Platform |
+| **Paula Riveros / Dayana Pulido** | DevOps 🔄 | Apoyo en despliegue en GCP |
+| **Juan Narvaez/ Dayana Pulido** | Cloud & Config ⚙️ | Configuración de servicios cloud (Cloud Storage, Cloud Run) |
+
+## 🛠️✨ Stack Tecnológico
+
+La aplicación **Book Journal** está construida utilizando un conjunto de tecnologías que abarcan el frontend, backend, base de datos e infraestructura en la nube.
 
 ---
 
-## Responsable
-**Paula Riveros** — Diseño, configuración y despliegue de la base de datos
+### 🎨 Frontend
+
+Encargado de la interacción con el usuario y la presentación visual de la aplicación.
+
+- **Lenguajes base:**
+  - HTML5 (estructura de las páginas: `login.html`, `registro.html`, `perfil.html`, `edit_perfil.html`, `lista_deseos.html`, `lectura_actual.html`, `libros_leidos.html`)
+  - CSS3 (estilos visuales)
+
+- **Tipografía:**
+  - Integración con Google Fonts (Dancing Script y Patrick Hand)
+
+- **Lógica de interfaz:**
+  - JavaScript (manejo de eventos, formularios y actualización dinámica de la UI)
+
+- **Comunicación:**
+  - Fetch API para el envío y recepción de datos entre frontend y backend
 
 ---
 
-## Stack tecnológico
+### ⚙️ Backend
+
+Encargado de la lógica de negocio, procesamiento de datos y comunicación con la base de datos.
+
+- **Lenguaje:** Java  
+- **Framework principal:** Spring Boot  
+- **Gestión de dependencias:** Maven (`pom.xml`)  
+- **Acceso a datos:** Spring Data JPA / Hibernate  
+- **Seguridad:** Spring Security  
+- **Servidor:** Apache Tomcat (embebido)  
+- **Contenerización:** Docker (para control de versiones y despliegue consistente)  
+
+---
+
+### 🗄️ Base de Datos
+
+Responsable del almacenamiento persistente de la información del sistema.
+
 - **Motor de base de datos:** PostgreSQL 18
 - **Servicio cloud:** Google Cloud SQL
 - **Cliente local:** pgAdmin 4
 - **Puerto local:** 5433
-- **Puerto cloud:** 5432
+- **Puerto cloud:** 5432 
+
+---
+## 🌐 URLs de Acceso a la Aplicación Desplegada
+
+### 🎨 Frontend (Cloud Storage)
+
+- 🔐 Login  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/login.html  
+
+- 📝 Registro  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/registro.html  
+
+- 👤 Perfil  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/perfil.html  
+
+- ✏️ Editar Perfil  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/edit_perfil.html  
+
+- 📖 Lectura Actual  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/lectura_actual.html  
+
+- 📚 Libros Leídos  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/libros_leidos.html  
+
+- ⭐ Lista de Deseos  
+  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/lista_deseos.html  
 
 ---
 
-## Estructura del repositorio
+### ⚙️ Backend (Cloud Run)
 
-```
-database/
-├── database.sql          # Script completo: tablas + datos de prueba
-├── README_database.md    # Este archivo
-└── diagrama_erd.html     # Diagrama Entidad-Relación (fondo oscuro)
-```
+- 🌐 API Base  
+  https://backend-book-675205716775.us-central1.run.app
+
+## 🏗️ Diagrama de Arquitectura del Sistema
+
+[Ver diagrama en PDF](./docs/darquitectura.pdf)
+[Ver diagrama en html](./docs/diagrama_erd_book_journal.html)
+## 💻 Instrucciones de Instalación Local
+
+Sigue los siguientes pasos para ejecutar el proyecto en un entorno local.
 
 ---
 
-## Modelo de datos
+### 🔧 Requisitos
+
+Asegúrate de tener instaladas las siguientes herramientas:
+
+- Java 17 o superior  
+- Maven   
+- Git  
+- PostgreSQL 18 instalado
+- Puerto disponible (se usó 5433 por conflicto con instalación previa)
+
+---
+
+### 📥 Clonar el repositorio
+
+```bash
+git clone <https://github.com/PaulaRiveros2203/Book-Journal.git>
+cd Book-Journal
+```
+### 🗄️Configuración de la base de datos
+
+## Estructura de la base de datos
 
 ### Tabla `usuarios`
 Almacena los datos de registro de cada usuario.
@@ -41,11 +142,8 @@ Almacena los datos de registro de cada usuario.
 | nombre | VARCHAR(100) | Nombre del usuario |
 | apellido | VARCHAR(100) | Apellido del usuario |
 | email | VARCHAR(150) | Email único por usuario |
-| contraseña | VARCHAR(255) | Contraseña encriptada (hash) |
-| fecha_registro | TIMESTAMP | Se registra automáticamente |
-| fecha_nacimiento | VARCHAR(50) | Fecha de nacimiento |
-| genero_favorito | VARCHAR(100) | Género literario favorito |
-| promedio_lectura | VARCHAR(50) | Promedio de libros por mes |
+| contraseña | VARCHAR(255) | Contraseña encriptada |
+| fecha_registro | TIMESTAMP | Fecha de registro automática |
 
 ---
 
@@ -59,11 +157,10 @@ Almacena los libros que cada usuario ha leído.
 | titulo | VARCHAR(200) | Título del libro |
 | autor | VARCHAR(150) | Autor del libro |
 | genero | VARCHAR(100) | Género literario |
-| resena | TEXT | Reseña del usuario |
-| inicio | DATE | Fecha de inicio de lectura |
-| fin | DATE | Fecha de fin de lectura |
+| fecha_lectura | DATE | Fecha en que lo leyó |
 | calificacion | INT | Calificación del 1 al 5 |
-| fecha_agregado | TIMESTAMP | Se registra automáticamente |
+| resena | TEXT | Reseña del usuario |
+| fecha_agregado | TIMESTAMP | Fecha de registro automática |
 
 ---
 
@@ -79,66 +176,100 @@ Almacena la lista de deseos de libros de cada usuario.
 | genero | VARCHAR(100) | Género literario |
 | prioridad | INT | Prioridad del 1 al 3 |
 | notas | TEXT | Notas del usuario |
-| fecha_agregado | TIMESTAMP | Se registra automáticamente |
+| fecha_agregado | TIMESTAMP | Fecha de registro automática |
 
 ---
-
-## Diagrama de relaciones
-
-```
-usuarios
-   │
-   ├──── libros_leidos (usuario_id → usuarios.id)
-   │         ON DELETE CASCADE
-   │
-   └──── libros_deseados (usuario_id → usuarios.id)
-             ON DELETE CASCADE
-```
-
----
-
-## Configuración local
-
-### Requisitos
-- PostgreSQL 18 instalado
-- Puerto disponible (se usó 5433 por conflicto con instalación previa)
-
-### Ejecutar el script SQL
+### 1. Ejecutar el script SQL
 ```bash
-psql -U postgres -p 5433 -f database/database.sql
+psql -U postgres -p 5433 -f database.sql
 ```
-
-### Verificar tablas
-```sql
-\c libreria_online
-\dt
+### 2. Configurar variables de entorno
+Copia el archivo `.env.example` y renómbralo como `.env`:
+```bash
+cp .env.example .env
 ```
+Luego edita `.env` con tus credenciales locales.
 
----
-
-## Configuración en la nube
-
-### Servicio
-- **Proveedor:** Google Cloud
-- **Servicio:** Cloud SQL
-- **Motor:** PostgreSQL 18
-- **Instancia:** book-journal-db
-- **IP pública:** 34.66.88.86
-- **Puerto:** 5432
-- **Base de datos:** libreria_online
-
-### Conexión desde Spring Boot
-Agregar en `application.properties`:
+### 3. Configuración en Spring Boot
+Agrega en tu `application.properties`:
 ```properties
-spring.datasource.url=jdbc:postgresql://34.66.88.86:5432/libreria_online
-spring.datasource.username=bookjournal
+spring.datasource.url=jdbc:postgresql://localhost:5433/libreria_online
+spring.datasource.username=postgres
 spring.datasource.password=tu_contraseña
 spring.jpa.hibernate.ddl-auto=validate
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ```
-
 ---
+### ⚙️ Ejecución del backend
+Accede a la carpeta del backend y ejecuta la aplicación:
+```bash
+cd back-end
+./mvnw spring-boot:run
+```
+---
+El backend se ejecutará en:
+```bash
+http://localhost:8080
+```
+### 🎨 Ejecución del frontend
+Accede a la carpeta del frontend:
+```bash
+cd front-end
+```
+Abre el archivo login.html en tu navegador
+o utiliza una extensión como Live Server en Visual Studio Code.
 
+### 🔗 Conexión frontend - backend
+Verifica que en los archivos JavaScript la URL del API esté configurada de forma local:
+```bash
+const API = "http://localhost:8080/api";
+```
+
+### 🚀 Comandos de Despliegue
+
+### 🐳 1. Construcción de la imagen Docker (Backend)
+```bash
+docker build -t gcr.io/test-489423/backend-book .
+```
+### 🔐 2. Autenticación en Google Cloud
+```bash
+gcloud auth login
+gcloud config set project test-489423
+```
+### 📦 3. Subir la imagen a Container Registry
+```bash
+   gcloud auth configure-docker
+   docker push gcr.io/test-489423/backend-book
+```
+### ☁️ 4. Desplegar en Cloud Run
+```bash
+   gcloud run deploy backend-book \
+  --image gcr.io/test-489423/backend-book \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+```
+### 🌐 5. Obtener URL del backend
+```bash
+   gcloud run services describe backend-book --region us-central1 --format                    'value(status.url)'
+```
+### 📁 6. Despliegue del Frontend en Cloud Storage
+Crear el bucket:
+```bash
+   gsutil mb -l us-central1 gs://book-journal-frontend
+```
+Subir archivos:
+```bash
+gsutil -m cp -r front-end/* gs://book-journal-frontend
+```
+Configurar acceso público:
+```bash
+gsutil iam ch allUsers:objectViewer gs://book-journal-frontend
+```
+Configurar como sitio web:
+```bash
+gsutil web set -m front-end/html/login.html gs://book-journal-frontend
+```
 ## Credenciales de prueba
 
 Usuarios insertados como datos de prueba para desarrollo y testing:
@@ -149,31 +280,7 @@ Usuarios insertados como datos de prueba para desarrollo y testing:
 | Carlos Mendoza | carlos@bookjournal.com | Ciencia Ficcion |
 | Laura Torres | laura@bookjournal.com | Romance |
 
-> **Nota:** Las contraseñas en la base de datos están en formato hash. Para pruebas usar la contraseña que configure el backend en su implementación de Spring Security.
-
----
-
-## Datos de prueba
-
-### Libros leídos insertados
-| Usuario | Título | Autor | Calificación |
-|---------|--------|-------|--------------|
-| Paula | Harry Potter y la Piedra Filosofal | J.K. Rowling | 5/5 |
-| Paula | El Señor de los Anillos | J.R.R. Tolkien | 5/5 |
-| Carlos | Dune | Frank Herbert | 4/5 |
-| Carlos | 1984 | George Orwell | 5/5 |
-| Laura | Orgullo y Prejuicio | Jane Austen | 5/5 |
-
-### Libros deseados insertados
-| Usuario | Título | Autor | Prioridad |
-|---------|--------|-------|-----------|
-| Paula | Las Cronicas de Narnia | C.S. Lewis | 1 |
-| Paula | El Nombre del Viento | Patrick Rothfuss | 2 |
-| Carlos | Fundacion | Isaac Asimov | 1 |
-| Laura | Jane Eyre | Charlotte Bronte | 1 |
-| Laura | Cumbres Borrascosas | Emily Bronte | 2 |
-
----
+> *Nota:* Las contraseñas en la base de datos están en formato hash. Para pruebas usar la contraseña que configure el backend en su implementación de Spring Security.
 
 ## Problemas encontrados y soluciones
 
@@ -186,20 +293,14 @@ Usuarios insertados como datos de prueba para desarrollo y testing:
 
 ---
 
-## Pasos realizados
+### Capturas de pantalla del funcionamiento
+# 1 Frontend
+[Login](./docs/Login.png)
+[Registro](./docs/Registro.png)
+[Perfil](./docs/Perfil.png)
+[EditarPerfil](./docs/editperfil.png)
+[ListaDeDeseos](./docs/ListadeDeseos.png)
+[LibrosLeidos](./docs/LibrosLeidos.png)
+[LecturaActual](./docs/LecturaActual.png)
 
-1. Instalación de PostgreSQL 18 en Windows (puerto 5433)
-2. Configuración del PATH del sistema
-3. Creación de la base de datos libreria_online
-4. Creación de las tablas usuarios, libros_leidos y libros_deseados
-5. Actualización de tablas para alinear con los modelos del backend (Spring Boot)
-6. Inserción de datos de prueba
-7. Creación de instancia PostgreSQL en Google Cloud SQL
-8. Configuración de red autorizada (0.0.0.0/0)
-9. Creación de usuario bookjournal en Cloud SQL
-10. Importación del script SQL al Cloud SQL via Cloud Storage
-11. Generación del diagrama ERD y diagrama de arquitectura
-
----
-
-*Proyecto académico — Book Journal 2026*
+# 2 Backend
