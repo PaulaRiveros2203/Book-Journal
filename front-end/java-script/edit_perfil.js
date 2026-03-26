@@ -1,62 +1,66 @@
 const API_URL = 'http://localhost:8080/api/usuarios';
 const STORAGE_KEY = 'usuarioLogueado';
 
-function irlectura_actual() { window.location.href = "lectura_actual.html"; }
-function irlibros_leidos() { window.location.href = "libros_leidos.html"; }
-function irlista_deseos() { window.location.href = "lista_deseos.html"; }
-function irperfil() { window.location.href = "perfil.html"; }
-function irlogin() { window.location.href = "login.html"; }
-function iredit_perfil() { window.location.href = "edit_perfil.html";}
+function irperfil() {
+    window.location.href = "perfil.html";
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const datosLocal = localStorage.getItem(STORAGE_KEY);
+    const datos = localStorage.getItem(STORAGE_KEY);
 
-    if (!datosLocal) {
+    if (!datos) {
         alert("Debes iniciar sesión");
         window.location.href = "login.html";
         return;
     }
 
-    const usuarioLocal = JSON.parse(datosLocal);
+    const usuario = JSON.parse(datos);
 
-    try {
-        const respuesta = await fetch(`${API_URL}/${usuarioLocal.id}`);
+    document.getElementById('nombre').value = usuario.nombre || '';
+    document.getElementById('correo').value = usuario.correo || '';
+    document.getElementById('fechaNacimiento').value = usuario.fechaNacimiento || '';
+    document.getElementById('promedioLectura').value = usuario.promedioLectura || '';
+    document.getElementById('generoFavorito').value = usuario.generoFavorito || '';
 
-        if (!respuesta.ok) throw new Error();
+    document.getElementById('form-editar-perfil')
+        .addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-        const usuario = await respuesta.json();
+            const usuarioActualizado = {
+                id: usuario.id,
+                nombre: document.getElementById('nombre').value,
+                correo: document.getElementById('correo').value,
+                fechaNacimiento: document.getElementById('fechaNacimiento').value,
+                promedioLectura: document.getElementById('promedioLectura').value,
+                generoFavorito: document.getElementById('generoFavorito').value,
+                password: usuario.password
+            };
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(usuario));
+            try {
+                const respuesta = await fetch(`${API_URL}/${usuario.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(usuarioActualizado)
+                });
 
-        renderizarPerfil(usuario);
+                if (!respuesta.ok) {
+                    alert("Error al actualizar");
+                    return;
+                }
 
-    } catch (error) {
-        console.warn("Usando datos locales");
-        renderizarPerfil(usuarioLocal);
-    }
+                const usuarioNuevo = await respuesta.json();
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(usuarioNuevo));
+
+                alert("Perfil actualizado ✅");
+                irperfil();
+
+            } catch (error) {
+                console.error(error);
+                alert("Error de conexión");
+            }
+        });
 });
-
-function renderizarPerfil(usuario) {
-    document.querySelector('.nombrecompleto').textContent =
-        `Nombre completo: ${usuario.nombre}`;
-
-    document.querySelector('.correo').innerHTML =
-        `<strong>Correo:</strong> ${usuario.correo}`;
-
-    document.querySelector('.fechaNacimiento').innerHTML =
-        `<strong>Fecha de nacimiento:</strong> ${usuario.fechaNacimiento}`;
-
-    document.querySelector('.promedioLectura').innerHTML =
-        `<strong>Promedio:</strong> ${usuario.promedioLectura} min`;
-
-    document.querySelector('.generoFavorito').innerHTML =
-        `<strong>Género favorito:</strong> ${usuario.generoFavorito}`;
-}
-
-function cerrarSesion() {
-    if (confirm("¿Cerrar sesión?")) {
-        localStorage.removeItem(STORAGE_KEY);
-        irlogin();
-    }
-}

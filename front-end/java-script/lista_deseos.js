@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarDeseos();
 });
 
-
 async function cargarDeseos() {
     const contenedor = document.getElementById('lista-deseos-container');
     contenedor.innerHTML = '';
