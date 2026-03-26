@@ -101,7 +101,7 @@ Estos pasos muestran un flujo reproducible para pasar del código fuente a un ba
 
 1. Clonar repo:
 ```
-git clone <repositorio>
+git clone https://github.com/PaulaRiveros2203/Book-Journal.git
 cd Book_Journal/back-end
 ```
 
