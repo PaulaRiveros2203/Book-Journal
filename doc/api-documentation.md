@@ -2,7 +2,7 @@
 
 ## 1. Visión general
 
-El propósito del backend y las convenciones principales. Explica por qué se eligió Spring Boot y PostgreSQL: escalabilidad, facilidad de configuración y compatibilidad con contenedores Docker.
+El propósito del backend y las convenciones principales. Principalmente se eligió Spring Boot y PostgreSQL: escalabilidad, facilidad de configuración y compatibilidad con contenedores Docker.
 
 Proyecto: `back-end` (Java Spring Boot + PostgreSQL)
 
