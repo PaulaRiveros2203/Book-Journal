@@ -74,25 +74,25 @@ Responsable del almacenamiento persistente de la información del sistema.
 ### 🎨 Frontend (Cloud Storage)
 
 - 🔐 Login  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/login.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/login.html  
 
 - 📝 Registro  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/registro.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/registro.html  
 
 - 👤 Perfil  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/perfil.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/perfil.html  
 
 - ✏️ Editar Perfil  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/edit_perfil.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/edit_perfil.html 
 
 - 📖 Lectura Actual  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/lectura_actual.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/lectura_actual.html  
 
 - 📚 Libros Leídos  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/libros_leidos.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/libros_leidos.html  
 
 - ⭐ Lista de Deseos  
-  https://storage.googleapis.com/book-journal-frontend/front-end/front-end/html/lista_deseos.html  
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/lista_deseos.html 
 
 ---
 
@@ -103,8 +103,8 @@ Responsable del almacenamiento persistente de la información del sistema.
 
 ## 🏗️ Diagrama de Arquitectura del Sistema
 
-[Ver diagrama en PDF](./docs/darquitectura.pdf)
-[Ver diagrama en html](./docs/diagrama_erd_book_journal.html)
+[Ver diagrama en PDF](./doc/darquitectura.pdf)
+[Ver diagrama en html](./doc/diagrama_erd_book_journal.html)
 ## 💻 Instrucciones de Instalación Local
 
 Sigue los siguientes pasos para ejecutar el proyecto en un entorno local.
@@ -295,12 +295,12 @@ Usuarios insertados como datos de prueba para desarrollo y testing:
 
 ### Capturas de pantalla del funcionamiento
 # 1 Frontend
-[Login](./docs/Login.png)
-[Registro](./docs/Registro.png)
-[Perfil](./docs/Perfil.png)
-[EditarPerfil](./docs/editperfil.png)
-[ListaDeDeseos](./docs/ListadeDeseos.png)
-[LibrosLeidos](./docs/LibrosLeidos.png)
-[LecturaActual](./docs/LecturaActual.png)
+[Login](./doc/Login.png)
+[Registro](./doc/Registro.png)
+[Perfil](./doc/Perfil.png)
+[EditarPerfil](./doc/editperfil.png)
+[ListaDeDeseos](./doc/ListadeDeseos.png)
+[LibrosLeidos](./doc/LibrosLeidos.png)
+[LecturaActual](./doc/LecturaActual.png)
 
 # 2 Backend

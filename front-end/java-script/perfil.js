@@ -6,6 +6,7 @@ function irlibros_leidos() { window.location.href = "libros_leidos.html"; }
 function irlista_deseos() { window.location.href = "lista_deseos.html"; }
 function irperfil() { window.location.href = "perfil.html"; }
 function irlogin() { window.location.href = "login.html"; }
+function iredit_perfil() { window.location.href = "edit_perfil.html";}
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -53,18 +54,10 @@ function renderizarPerfil(usuario) {
         `<strong>Género favorito:</strong> ${usuario.generoFavorito}`;
 }
 
+// cerrar sesión
 function cerrarSesion() {
     if (confirm("¿Cerrar sesión?")) {
         localStorage.removeItem(STORAGE_KEY);
         irlogin();
-    }
-
-    try {
-        const usuario = JSON.parse(datos);
-        renderizarPerfil(usuario);
-    } catch (error) {
-        console.error("Error al leer los datos de sesión:", error);
-        localStorage.removeItem(STORAGE_KEY);
-        window.location.href = "login.html";
     }
 }
