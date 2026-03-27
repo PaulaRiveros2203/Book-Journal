@@ -96,7 +96,7 @@ Para cada uno de los módulos se creó un css personalizado a pesar de que mucha
 ![Captura de titulo y tipografia](imagenesdoc/Titulos_tipografia.png)  
 
 ## Inputs y Formularios
-![Captura de pantalla input en formularios](Imagenes-README/Formularios.png)
+![Captura de pantalla input en formularios](imagenesdoc/Formularios.png)
 
 ## Botones
 ![Captura de pantalla botones](imagenesdoc/Botones.png)
