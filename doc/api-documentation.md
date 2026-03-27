@@ -10,7 +10,6 @@ Proyecto: `back-end` (Java Spring Boot + PostgreSQL)
 - DB: PostgreSQL.
 - Capa de rutado: `/api/*` para recursos.
 - CORS habilitado (`@CrossOrigin("*")`) para frontend estático.
-- No hay manejo de excepciones personalizado; los casos nulos devuelven 200 con body `null` a menos que la infraestructura devuelva 500.
 
 ![Captura de pantalla](imagenesdoc/EstruturaSpringBoot-Postgresql.png)
 
