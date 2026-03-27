@@ -195,7 +195,7 @@ Cloud Run permite ejecutar aplicaciones contenidas en Docker sin necesidad de ad
 
 **Cloud Run** es un servicio serverless de Google Cloud que permite ejecutar contenedores de forma automática.
 
-### mCaracterísticas principales:
+### Características principales:
 
 - No necesitas administrar servidores
 - Escalado automático
