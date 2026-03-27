@@ -182,3 +182,225 @@ Esta sección indica cómo comprobar que el backend está listo para el cliente 
 - Logs: `docker-compose logs -f backend`
 - Reiniciar: `docker-compose restart`
 - Eliminar: `docker-compose down -v`
+
+# Despliegue de Backend en Google Cloud Run
+
+Se describe el proceso completo para desplegar un backend (por ejemplo, una aplicación Spring Boot) en la nube utilizando **Google Cloud Run**.
+
+Cloud Run permite ejecutar aplicaciones contenidas en Docker sin necesidad de administrar servidores, lo que simplifica enormemente el despliegue y escalabilidad.
+
+---
+
+## ¿Qué es Cloud Run?
+
+**Cloud Run** es un servicio serverless de Google Cloud que permite ejecutar contenedores de forma automática.
+
+### mCaracterísticas principales:
+
+- No necesitas administrar servidores
+- Escalado automático
+- Pago por uso
+- Integración con otros servicios de Google Cloud
+- Despliegue rápido desde contenedores Docker
+
+---
+
+## Flujo general
+
+El proceso de despliegue sigue estos pasos:
+
+1. Autenticarse en Google Cloud
+2. Configurar el proyecto
+3. Construir la aplicación
+4. Crear una imagen Docker
+5. Subir la imagen
+6. Desplegar en Cloud Run
+
+---
+
+## Paso a paso con explicación
+
+### 1. Ubicarse en el backend
+
+```bash
+cd C:\Users\juanj\Desktop\Juan\Book-Journal\back-end
+```
+
+Nos ubicamos en la carpeta donde se encuentra el proyecto backend.
+
+---
+
+### 2. Iniciar sesión en Google Cloud
+
+```bash
+gcloud auth login
+```
+
+Este comando autentica tu cuenta de Google en la terminal.
+
+Se abrirá el navegador para seleccionar tu cuenta.
+
+---
+
+### 3. Seleccionar el proyecto
+
+```bash
+gcloud config set project test-489423
+```
+
+Define el proyecto en el que se trabajará.
+
+Todos los recursos se crearán dentro de este proyecto.
+
+---
+
+### 4. Habilitar APIs
+
+```bash
+gcloud services enable run.googleapis.com
+gcloud services enable artifactregistry.googleapis.com
+gcloud services enable cloudbuild.googleapis.com
+gcloud services enable sqladmin.googleapis.com
+```
+
+Se habilitan los servicios necesarios:
+
+- Cloud Run → ejecutar la aplicación
+- Artifact Registry → almacenar imágenes Docker
+- Cloud Build → construir imágenes
+- Cloud SQL → base de datos
+
+Solo se hace una vez.
+
+---
+
+### 5. Crear repositorio Docker
+
+```bash
+gcloud artifacts repositories create backend-repo \
+--repository-format=docker \
+--location=us-central1
+```
+
+Crea un repositorio para almacenar imágenes Docker en Google Cloud.
+
+---
+
+### 6. Autenticar Docker
+
+```bash
+gcloud auth configure-docker us-central1-docker.pkg.dev
+```
+
+Permite que Docker pueda subir imágenes al repositorio de Google Cloud.
+
+---
+
+### 7. Compilar el backend
+
+```bash
+.\mvnw.cmd clean package -DskipTests
+```
+
+Genera el archivo `.jar` ejecutable de la aplicación.
+
+---
+
+### 8. Crear imagen Docker
+
+```bash
+docker build -t us-central1-docker.pkg.dev/test-489423/backend-repo/backend-book .
+```
+
+Construye una imagen Docker que contiene:
+
+- El backend
+- El entorno de ejecución
+- Dependencias necesarias
+
+---
+
+### 9. Subir la imagen
+
+```bash
+docker push us-central1-docker.pkg.dev/test-489423/backend-repo/backend-book
+```
+
+Sube la imagen al repositorio en la nube.
+
+---
+
+### 10. Desplegar en Cloud Run
+
+```bash
+gcloud run deploy backend-book \
+--image us-central1-docker.pkg.dev/test-489423/backend-repo/backend-book \
+--platform managed \
+--region us-central1 \
+--allow-unauthenticated \
+--port 8080 \
+--add-cloudsql-instances test-489423:us-central1:book-journal-db \
+--set-env-vars "SPRING_DATASOURCE_URL=jdbc:postgresql://localhost/libreria_online?socketFactory=com.google.cloud.sql.postgres.SocketFactory&cloudSqlInstance=test-489423:us-central1:book-journal-db,SPRING_DATASOURCE_USERNAME=bookjournal,SPRING_DATASOURCE_PASSWORD=BookJournal2026*"
+```
+
+Este comando:
+
+- Despliega la aplicación
+- Configura el puerto
+- Conecta con la base de datos
+- Define variables de entorno
+
+---
+
+## Resultado
+
+Se obtiene una URL pública como:
+
+```
+https://backend-book-xxxxx.a.run.app
+```
+
+La API queda disponible en internet.
+
+---
+
+## Flujo de actualización
+
+Cada vez que cambias el código:
+
+```bash
+.\mvnw.cmd clean package -DskipTests
+docker build -t ...
+docker push ...
+gcloud run deploy ...
+```
+
+---
+
+## ¿Por qué usar Cloud Run?
+
+### Ventajas principales
+
+#### 1. Serverless
+No necesitas administrar servidores.
+
+#### 2. Escalabilidad automática
+Se adapta a la cantidad de usuarios automáticamente.
+
+#### 3. Pago por uso
+Solo pagas cuando tu aplicación está en uso.
+
+#### 4. Despliegue rápido
+Permite subir aplicaciones en minutos.
+
+#### 5. Integración con servicios de Google
+Se conecta fácilmente con Cloud SQL, IAM, etc.
+
+---
+
+## Errores comunes
+
+- Docker no está ejecutándose
+- Puerto no configurado correctamente
+- Problemas de conexión a la base de datos
+- Nombre incorrecto de la imagen
