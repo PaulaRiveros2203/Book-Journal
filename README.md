@@ -74,7 +74,7 @@ Responsable del almacenamiento persistente de la información del sistema.
 ### 🎨 Frontend (Cloud Storage)
 
 - 🔐 Login  
-  [https://storage.googleapis.com/book-journal-frontend/front-end/html/login.html]
+  https://storage.googleapis.com/book-journal-frontend/front-end/html/login.html
 
 - 📝 Registro  
   https://storage.googleapis.com/book-journal-frontend/front-end/html/registro.html  
